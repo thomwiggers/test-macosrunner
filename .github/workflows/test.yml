@@ -1,0 +1,11 @@
+on: push
+
+name: "Get cpuinfo"
+jobs:
+  mac:
+    runs-on: macos-latest
+    steps:
+      - run: |
+          sysctl -n machdep.cpu.brand_string
+          system_profiler | grep Processor
+          sysctl hw
