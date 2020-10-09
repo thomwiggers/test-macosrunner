@@ -15,7 +15,7 @@ jobs:
     runs-on: macos-latest
     needs: select-runner
     steps:
-      - run: echo ${{ steps.macos.outputs }}
+      - run: echo ${{ needs.select-runner.outputs.macos-runner }}
       - run: |
           sysctl -n machdep.cpu.brand_string
           system_profiler | grep Processor
