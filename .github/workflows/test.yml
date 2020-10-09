@@ -12,10 +12,9 @@ jobs:
           echo set-output name=runner::${OVERRIDE_MACOS_RUNNER:-macos-latest}
           echo ::set-output name=runner::${OVERRIDE_MACOS_RUNNER:-macos-latest}
   mac:
-    runs-on: macos-latest
+    runs-on: ${{ needs.select-runner.outputs.macos-runner }}
     needs: select-runner
     steps:
-      - run: echo ${{ needs.select-runner.outputs.macos-runner }}
       - run: |
           sysctl -n machdep.cpu.brand_string
           system_profiler | grep Processor
