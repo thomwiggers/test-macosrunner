@@ -2,8 +2,17 @@ on: push
 
 name: "Get cpuinfo"
 jobs:
+  select-runner:
+    runs-on: ubuntu-latest
+    outputs:
+      macos-runner: ${{ steps.macos.outputs.runner }}
+    steps:
+      - id: macos
+        run: |
+          echo ::set-output name=runner::${OVERRIDE_MACOS_RUNNER:-macos-latest}
   mac:
-    runs-on: macos-latest
+    runs-on: ${{ needs.select-runner.macos-runner }}
+    needs: select-runner
     steps:
       - run: |
           sysctl -n machdep.cpu.brand_string
