@@ -19,3 +19,6 @@ jobs:
           sysctl -n machdep.cpu.brand_string
           system_profiler | grep Processor
           sysctl hw
+      - run: |
+          pip install -r requirements.txt
+          python test.py
