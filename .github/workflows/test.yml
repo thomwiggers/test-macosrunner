@@ -28,3 +28,8 @@ jobs:
       - run: |
           pip install -r requirements.txt
           python test.py
+          python test.py > output.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: cpuinfo.txt
+          path: output.txt
