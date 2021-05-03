@@ -31,5 +31,21 @@ jobs:
           python test.py > output.txt
       - uses: actions/upload-artifact@v2
         with:
-          name: cpuinfo.txt
+          name: cpuinfo-mac.txt
+          path: output.txt
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup Python"
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - run: |
+          cat /proc/cpuinfo | tee cpuinfo.txt
+          pip install -r requirements.txt
+          python test.py
+          python test.py > output.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: cpuinfo-linux.txt
           path: output.txt
